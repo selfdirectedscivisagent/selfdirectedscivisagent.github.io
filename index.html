@@ -1,11 +1,447 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>My Website</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NLI4VolVis Replica</title>
+  <style>
+    :root {
+      --bg: #f7f8fb;
+      --panel: #ffffff;
+      --text: #1a1f36;
+      --muted: #5d6475;
+      --line: #e6e9f2;
+      --accent: #3c63ff;
+      --accent-2: #7a5cff;
+      --soft: #eef3ff;
+      --shadow: 0 10px 30px rgba(23, 33, 77, 0.08);
+      --radius: 18px;
+      --max: 1100px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(122, 92, 255, 0.08), transparent 30%),
+        radial-gradient(circle at top right, rgba(60, 99, 255, 0.08), transparent 30%),
+        var(--bg);
+      line-height: 1.65;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container {
+      width: min(calc(100% - 32px), var(--max));
+      margin: 0 auto;
+    }
+
+    .hero {
+      padding: 64px 0 36px;
+      text-align: center;
+    }
+
+    .title {
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+      margin: 0 0 18px;
+      font-weight: 800;
+    }
+
+    .authors,
+    .subline {
+      font-size: 1.02rem;
+      color: var(--muted);
+      margin: 6px 0;
+    }
+
+    .award {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin: 18px 0 10px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(60,99,255,0.12), rgba(122,92,255,0.12));
+      color: #263372;
+      font-weight: 700;
+      border: 1px solid rgba(60,99,255,0.12);
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--text);
+      font-weight: 700;
+      box-shadow: 0 4px 12px rgba(20, 25, 45, 0.04);
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #fff;
+      border: none;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 20px rgba(20, 25, 45, 0.08);
+      text-decoration: none;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid rgba(20, 25, 45, 0.06);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .lead {
+      margin: 22px auto 0;
+      padding: 22px 24px;
+      width: min(900px, 100%);
+      font-size: 1.08rem;
+      color: #283148;
+    }
+
+    section {
+      padding: 24px 0;
+    }
+
+    h2 {
+      font-size: 1.9rem;
+      margin: 0 0 14px;
+      letter-spacing: -0.02em;
+    }
+
+    h3 {
+      font-size: 1.15rem;
+      margin: 0 0 8px;
+    }
+
+    .section-copy {
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .abstract {
+      padding: 26px 28px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .study-card {
+      padding: 18px;
+    }
+
+    .media {
+      aspect-ratio: 16 / 9;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(135deg, rgba(60,99,255,0.10), rgba(122,92,255,0.10)),
+        linear-gradient(180deg, #f8faff 0%, #eef2ff 100%);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+    }
+
+    .media::before,
+    .media::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(8px);
+    }
+
+    .media::before {
+      width: 180px;
+      height: 180px;
+      background: rgba(60, 99, 255, 0.22);
+      top: -36px;
+      left: -28px;
+    }
+
+    .media::after {
+      width: 140px;
+      height: 140px;
+      background: rgba(122, 92, 255, 0.18);
+      right: -20px;
+      bottom: -18px;
+    }
+
+    .media-label {
+      position: relative;
+      z-index: 1;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid rgba(255,255,255,0.85);
+      backdrop-filter: blur(8px);
+      font-weight: 700;
+      color: #38425c;
+    }
+
+    .figure-wide {
+      padding: 20px;
+    }
+
+    .placeholder-figure {
+      aspect-ratio: 16 / 7;
+      border-radius: 16px;
+      border: 1px dashed #cfd7eb;
+      background: repeating-linear-gradient(
+        45deg,
+        #f7f9ff,
+        #f7f9ff 14px,
+        #eef3ff 14px,
+        #eef3ff 28px
+      );
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #52607f;
+      font-weight: 700;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .pipeline-list {
+      margin: 16px 0 0;
+      padding-left: 20px;
+    }
+
+    .pipeline-list li { margin: 10px 0; }
+
+    .study-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .bullet-card {
+      padding: 20px 22px;
+    }
+
+    .bullet-card ul { margin: 10px 0 0; padding-left: 20px; }
+    .bullet-card li { margin: 10px 0; }
+
+    .bibtex {
+      background: #0f1323;
+      color: #d9e2ff;
+      border-radius: 16px;
+      padding: 20px;
+      overflow-x: auto;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05);
+    }
+
+    .footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.94rem;
+      padding: 24px 0 56px;
+    }
+
+    .small-note {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 860px) {
+      .grid-2,
+      .study-columns {
+        grid-template-columns: 1fr;
+      }
+
+      .hero { padding-top: 40px; }
+      .lead { padding: 18px; }
+      .abstract,
+      .figure-wide,
+      .bullet-card,
+      .study-card { padding: 18px; }
+    }
+  </style>
 </head>
 <body>
-  <h1>Hello world</h1>
-  <p>This is my GitHub Pages site.</p>
+  <header class="hero container">
+    <h1 class="title">NLI4VolVis: Natural Language Interaction for Volume Visualization via LLM Multi-Agents and Editable 3D Gaussian Splatting</h1>
+    <p class="authors">
+      <a href="#">Kuangshi Ai</a>,
+      <a href="#">Kaiyuan Tang</a>,
+      <a href="#">Chaoli Wang</a>
+    </p>
+    <p class="subline">University of Notre Dame</p>
+    <div class="award">IEEE VIS 2025 Best Paper Award (Top 1%)</div>
+    <div class="button-row">
+      <a class="btn primary" href="#">Paper</a>
+      <a class="btn" href="#">Supplementary</a>
+      <a class="btn" href="#">Code</a>
+      <a class="btn" href="#">arXiv</a>
+    </div>
+    <div class="lead panel">
+      NLI4VolVis revolutionizes volume data exploration by enabling users to interact with complex 3D datasets through natural language commands via LLM multi-agents and editable 3D Gaussian Splatting, making scientific visualization more accessible and intuitive.
+    </div>
+  </header>
+
+  <main class="container">
+    <section>
+      <div class="panel abstract">
+        <h2>Abstract</h2>
+        <p>
+          Traditional volume visualization (VolVis) methods, like direct volume rendering, suffer from rigid transfer function designs and high computational costs. Although novel view synthesis approaches enhance rendering efficiency, they require additional learning effort for non-experts and lack support for semantic-level interaction. To bridge this gap, we propose NLI4VolVis, an interactive system that enables users to explore, query, and edit volumetric scenes using natural language.
+        </p>
+        <p>
+          NLI4VolVis integrates multi-view semantic segmentation and vision-language models to extract and understand semantic components in a scene. We introduce a multi-agent large language model architecture equipped with extensive function-calling tools to interpret user intents and execute visualization tasks.
+        </p>
+        <p>
+          The agents leverage external tools and declarative VolVis commands to interact with the VolVis engine powered by 3D editable Gaussians, enabling open-vocabulary object querying, real-time scene editing, best-view selection, and 2D stylization. We validate the system through case studies and a user study, highlighting improved accessibility and usability in volumetric data exploration.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Case Studies</h2>
+      <p class="section-copy">
+        Six representative examples highlight the system's ability to support diverse datasets and natural language interactions across different visualization scenarios.
+      </p>
+      <div class="grid-2">
+        <article class="panel study-card">
+          <div class="media"><div class="media-label">Carp Demo Video</div></div>
+          <h3>Carp</h3>
+          <p>Biological dataset segmented into seven components with guided tours, semantic highlighting, and real-time stylized transformations.</p>
+        </article>
+        <article class="panel study-card">
+          <div class="media"><div class="media-label">Backpack Demo Video</div></div>
+          <h3>Backpack</h3>
+          <p>CT scan exploration that resolves vague natural references such as “the box” or “the square-shaped object” through vision-language reasoning.</p>
+        </article>
+        <article class="panel study-card">
+          <div class="media"><div class="media-label">Chameleon Demo Video</div></div>
+          <h3>Chameleon</h3>
+          <p>Context-aware visualization and stylization where the scene adapts to environmental prompts like a desert-inspired appearance.</p>
+        </article>
+        <article class="panel study-card">
+          <div class="media"><div class="media-label">Kingsnake Demo Video</div></div>
+          <h3>Kingsnake</h3>
+          <p>Implicit instruction interpretation, such as rendering the snake inside a semi-transparent egg by automatically adjusting opacity.</p>
+        </article>
+        <article class="panel study-card">
+          <div class="media"><div class="media-label">Mantle Temperature Demo</div></div>
+          <h3>Mantle Temperature</h3>
+          <p>Scientific colormap control combined with creative restyling, enabling both accurate feature emphasis and artistic transformations.</p>
+        </article>
+        <article class="panel study-card">
+          <div class="media"><div class="media-label">Supernova Demo Video</div></div>
+          <h3>Supernova</h3>
+          <p>Astrophysical scene understanding that explains structures such as shockwaves and isolates semantically meaningful components.</p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="panel figure-wide">
+        <h2>System Pipeline</h2>
+        <p class="section-copy">A multi-stage workflow integrates natural language understanding with semantic scene analysis and real-time volume visualization.</p>
+        <div class="placeholder-figure">Pipeline Figure Placeholder</div>
+        <ol class="pipeline-list">
+          <li><strong>Semantic Understanding:</strong> Multi-view semantic segmentation and vision-language models identify open-vocabulary components within the scene.</li>
+          <li><strong>Editable 3D Gaussian Rendering:</strong> The VolVis engine supports real-time scene editing, view selection, and stylization.</li>
+          <li><strong>LLM Multi-Agent Collaboration:</strong> Specialized agents decompose user requests into executable visualization commands.</li>
+          <li><strong>Natural Language Interface:</strong> Users issue plain-English requests without needing to manipulate low-level visualization parameters.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section>
+      <div class="panel figure-wide">
+        <h2>Interactive Interface</h2>
+        <p class="section-copy">The interface combines a rendering window, a conversational widget, traditional controls, and an action log in a single cohesive layout.</p>
+        <div class="placeholder-figure">Interface Figure Placeholder</div>
+        <p class="small-note">The original site presents an interface figure with labeled components for the panel, rendering window, chat widget, and action log.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>User Study</h2>
+      <p class="section-copy">A study with eight participants examined usability, accessibility, and exploration efficiency across different experience levels.</p>
+      <div class="study-columns">
+        <div class="panel bullet-card">
+          <h3>Key Advantages</h3>
+          <ul>
+            <li>Improved accessibility for novice users through natural language commands.</li>
+            <li>Reduced cognitive load by avoiding complex parameter memorization.</li>
+            <li>Faster and broader exploration enabled by multi-agent task decomposition.</li>
+          </ul>
+        </div>
+        <div class="panel bullet-card">
+          <h3>Identified Shortcomings</h3>
+          <ul>
+            <li>Ambiguous natural language occasionally required extra iterations.</li>
+            <li>LLM latency could interrupt the interactive flow on harder tasks.</li>
+            <li>Specialized domain terminology remained limited by tool coverage.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="panel figure-wide" style="margin-top:18px;">
+        <div class="placeholder-figure">Survey Responses Figure Placeholder</div>
+      </div>
+    </section>
+
+    <section>
+      <div class="panel abstract">
+        <h2>System Demonstration</h2>
+        <p>
+          Embed a presentation video, conference demo clip, or interactive iframe here to mirror the live project page. Since this file is fully static and self-contained, the demo area can be connected later by replacing a placeholder with a local video file or an embedded player.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <h2>BibTeX</h2>
+      <pre class="bibtex">@article{ai2025nli4volvis,
+  author  = {Ai, Kuangshi and Tang, Kaiyuan and Wang, Chaoli},
+  title   = {{NLI4VolVis}: Natural Language Interaction for Volume Visualization via LLM Multi-Agents and Editable 3D Gaussian Splatting},
+  journal = {IEEE Transactions on Visualization and Computer Graphics (IEEE VIS 2025)},
+  volume  = {32},
+  number  = {1},
+  year    = {2026},
+  eprint  = {2507.12621},
+  archivePrefix = {arXiv},
+  note    = {Preprint available at https://arxiv.org/abs/2507.12621}
+}</pre>
+    </section>
+  </main>
+
+  <footer class="container footer">
+    This single-file replica mirrors the layout and visual style of the original academic project page, while keeping all styling embedded directly inside <code>index.html</code>.
+  </footer>
 </body>
 </html>
