@@ -173,26 +173,7 @@
 
     .media::before,
     .media::after {
-      content: "";
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(8px);
-    }
-
-    .media::before {
-      width: 180px;
-      height: 180px;
-      background: rgba(60, 99, 255, 0.22);
-      top: -36px;
-      left: -28px;
-    }
-
-    .media::after {
-      width: 140px;
-      height: 140px;
-      background: rgba(122, 92, 255, 0.18);
-      right: -20px;
-      bottom: -18px;
+      display: none;
     }
 
     .media-label {
@@ -292,14 +273,15 @@
 </head>
 <body>
   <header class="hero container">
-    <h1 class="title">NLI4VolVis: Natural Language Interaction for Volume Visualization via LLM Multi-Agents and Editable 3D Gaussian Splatting</h1>
-    <p class="authors">
-      <a href="#">Kuangshi Ai</a>,
-      <a href="#">Kaiyuan Tang</a>,
-      <a href="#">Chaoli Wang</a>
-    </p>
-    <p class="subline">University of Notre Dame</p>
-    <div class="award">IEEE VIS 2025 Best Paper Award (Top 1%)</div>
+    <h1 class="title">SASAV: Self-Directed Agent for Scientific Analysis and Visualization</h1>
+    <!-- <p class="authors">
+      <a href="#">Jianxin Sun</a>,
+      <a href="#">David Lenz</a>,
+      <a href="#">Tom Peterka</a>
+      <a href="#">Hongfeng Yu</a>
+    </p> -->
+    <!-- <p class="subline">University of Nebraska-Lincoln and Argonne National Laboratory</p> -->
+    <div class="award">IEEE VIS 2026</div>
     <div class="button-row">
       <a class="btn primary" href="#">Paper</a>
       <a class="btn" href="#">Supplementary</a>
@@ -307,7 +289,7 @@
       <a class="btn" href="#">arXiv</a>
     </div>
     <div class="lead panel">
-      NLI4VolVis revolutionizes volume data exploration by enabling users to interact with complex 3D datasets through natural language commands via LLM multi-agents and editable 3D Gaussian Splatting, making scientific visualization more accessible and intuitive.
+      In this work, we propose a Self-Directed Agent for Scientific Analysis and Visualization (SASAV), the first fully autonomous AI agent to perform scientific data analysis and generate insightful visualizations without any external prompting or human-in-the-loop feedback.
     </div>
   </header>
 
@@ -316,13 +298,7 @@
       <div class="panel abstract">
         <h2>Abstract</h2>
         <p>
-          Traditional volume visualization (VolVis) methods, like direct volume rendering, suffer from rigid transfer function designs and high computational costs. Although novel view synthesis approaches enhance rendering efficiency, they require additional learning effort for non-experts and lack support for semantic-level interaction. To bridge this gap, we propose NLI4VolVis, an interactive system that enables users to explore, query, and edit volumetric scenes using natural language.
-        </p>
-        <p>
-          NLI4VolVis integrates multi-view semantic segmentation and vision-language models to extract and understand semantic components in a scene. We introduce a multi-agent large language model architecture equipped with extensive function-calling tools to interpret user intents and execute visualization tasks.
-        </p>
-        <p>
-          The agents leverage external tools and declarative VolVis commands to interact with the VolVis engine powered by 3D editable Gaussians, enabling open-vocabulary object querying, real-time scene editing, best-view selection, and 2D stylization. We validate the system through case studies and a user study, highlighting improved accessibility and usability in volumetric data exploration.
+          With recent advances in frontier multimodal large language models (MLLMs) for data understanding and visual reasoning, the role of LLMs has evolved from passive LLM-as-an-interface to proactive LLM-as-a-judge, enabling deeper integration into the scientific data analysis and visualization pipelines. However, existing scientific visualization agents still rely on domain experts to provide prior knowledge for specific datasets or visualization-oriented objective functions to guide the workflow through iterative feedback. This reactive, data-dependent, human-in-the-loop (HITL) paradigm is time-consuming and does not scale effectively to large-scale scientific data. In this work, we propose a Self-Directed Agent for Scientific Analysis and Visualization (SASAV), the first fully autonomous AI agent to perform scientific data analysis and generate insightful visualizations without any external prompting or HITL feedback. SASAV is a multi-agent system that automatically orchestrates data exploration workflows through our proposed components, including automated data profiling, context-aware knowledge retrieval, and reasoning-driven visualization parameter exploration, while supporting downstream interactive visualization tasks. This work establishes a foundational building block for the future AI for Science to accelerate scientific discovery and innovation at scale.
         </p>
       </div>
     </section>
@@ -334,34 +310,60 @@
       </p>
       <div class="grid-2">
         <article class="panel study-card">
-          <div class="media"><div class="media-label">Carp Demo Video</div></div>
+          <!-- <div class="media"><div class="media-label">Carp Demo Video</div></div> -->
+          <div class="media">
+            <video controls autoplay muted loop playsinline
+                  style="width: 100%; height: 100%; object-fit: cover; border-radius: 14px;">
+              <source src="videos/abdo_data_and_trajectory.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
           <h3>Carp</h3>
           <p>Biological dataset segmented into seven components with guided tours, semantic highlighting, and real-time stylized transformations.</p>
         </article>
         <article class="panel study-card">
-          <div class="media"><div class="media-label">Backpack Demo Video</div></div>
+          <div class="media">
+            <video controls autoplay muted loop playsinline
+                  style="width: 100%; height: 100%; object-fit: cover; border-radius: 14px;">
+              <source src="videos/chameleon_data_and_trajectory.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
           <h3>Backpack</h3>
           <p>CT scan exploration that resolves vague natural references such as “the box” or “the square-shaped object” through vision-language reasoning.</p>
         </article>
         <article class="panel study-card">
-          <div class="media"><div class="media-label">Chameleon Demo Video</div></div>
+          <div class="media">
+            <video controls autoplay muted loop playsinline
+                  style="width: 100%; height: 100%; object-fit: cover; border-radius: 14px;">
+              <source src="videos/miranda_data_and_trajectory.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
           <h3>Chameleon</h3>
           <p>Context-aware visualization and stylization where the scene adapts to environmental prompts like a desert-inspired appearance.</p>
         </article>
         <article class="panel study-card">
-          <div class="media"><div class="media-label">Kingsnake Demo Video</div></div>
+          <div class="media">
+            <video controls autoplay muted loop playsinline
+                  style="width: 100%; height: 100%; object-fit: cover; border-radius: 14px;">
+              <source src="videos/flame_data_and_trajectory.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
           <h3>Kingsnake</h3>
           <p>Implicit instruction interpretation, such as rendering the snake inside a semi-transparent egg by automatically adjusting opacity.</p>
         </article>
         <article class="panel study-card">
-          <div class="media"><div class="media-label">Mantle Temperature Demo</div></div>
+          <div class="media">
+            <video controls autoplay muted loop playsinline
+                  style="width: 100%; height: 100%; object-fit: cover; border-radius: 14px;">
+              <source src="videos/richtmyer_data_and_trajectory.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
           <h3>Mantle Temperature</h3>
           <p>Scientific colormap control combined with creative restyling, enabling both accurate feature emphasis and artistic transformations.</p>
-        </article>
-        <article class="panel study-card">
-          <div class="media"><div class="media-label">Supernova Demo Video</div></div>
-          <h3>Supernova</h3>
-          <p>Astrophysical scene understanding that explains structures such as shockwaves and isolates semantically meaningful components.</p>
         </article>
       </div>
     </section>
