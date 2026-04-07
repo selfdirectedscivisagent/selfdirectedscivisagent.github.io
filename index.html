@@ -284,7 +284,7 @@
     <div class="award">IEEE VIS 2026</div>
     <div class="button-row">
       <a class="btn primary" href="#">Paper</a>
-      <a class="btn" href="assets/SASAV_Appendix_VIS_2026_.pdf">Supplementary</a>
+      <a class="btn" href="assets/SASAV_Appendix_VIS_2026.pdf">Supplementary</a>
       <a class="btn" href="https://github.com/selfdirectedscivisagent/SASAV">Code</a>
       <!-- <a class="btn" href="#">arXiv</a> -->
     </div>
@@ -306,7 +306,7 @@
     <section>
       <h2>Case Studies</h2>
       <p class="section-copy">
-        Six representative examples highlight the system's ability to support diverse datasets and natural language interactions across different visualization scenarios.
+        Five representative scientific volumetric datasets highlight the usability of SASAV.
       </p>
       <div class="grid-2">
         <article class="panel study-card">
@@ -370,63 +370,71 @@
 
     <section>
       <div class="panel figure-wide">
-        <h2>System Pipeline</h2>
-        <p class="section-copy">A multi-stage workflow integrates natural language understanding with semantic scene analysis and real-time volume visualization.</p>
-        <div class="placeholder-figure">Pipeline Figure Placeholder</div>
-        <ol class="pipeline-list">
+        <h2>Agentic Workflow</h2>
+        <p class="section-copy">SASAV consists of four steps: 1) Data profiling 2) Knowledge retrieval 3) Transfer functions suggestion 4) View selection</p>
+        <div class="placeholder-figure" style="padding:0; background:#fff; aspect-ratio:auto;">
+          <img src="assets/architecture.png"
+              alt="Wide Visualization Result"
+              style="width:100%; height:auto; display:block; border-radius:16px;">
+        </div>
+        <!-- <ol class="pipeline-list">
           <li><strong>Semantic Understanding:</strong> Multi-view semantic segmentation and vision-language models identify open-vocabulary components within the scene.</li>
           <li><strong>Editable 3D Gaussian Rendering:</strong> The VolVis engine supports real-time scene editing, view selection, and stylization.</li>
           <li><strong>LLM Multi-Agent Collaboration:</strong> Specialized agents decompose user requests into executable visualization commands.</li>
           <li><strong>Natural Language Interface:</strong> Users issue plain-English requests without needing to manipulate low-level visualization parameters.</li>
-        </ol>
+        </ol> -->
       </div>
     </section>
 
     <section>
       <div class="panel figure-wide">
-        <h2>Interactive Interface</h2>
-        <p class="section-copy">The interface combines a rendering window, a conversational widget, traditional controls, and an action log in a single cohesive layout.</p>
-        <div class="placeholder-figure">Interface Figure Placeholder</div>
-        <p class="small-note">The original site presents an interface figure with labeled components for the panel, rendering window, chat widget, and action log.</p>
+        <h2>User Interface</h2>
+        <p class="section-copy">SASAV has a intuitive and minimal user interface, user only needs a API key of their choice of LLM to run SASAV for generating visualize their own scientific data with ease.</p>
+        <div class="placeholder-figure" style="padding:0; background:#fff;">
+          <img src="assets/UI.png"
+              alt="SASAV User Interface"
+              style="width:100%; height:auto; display:block; border-radius:16px;">
+        </div>
+        <!-- <p class="small-note">The original site presents an interface figure with labeled components for the panel, rendering window, chat widget, and action log.</p> -->
       </div>
     </section>
 
     <section>
-      <h2>User Study</h2>
-      <p class="section-copy">A study with eight participants examined usability, accessibility, and exploration efficiency across different experience levels.</p>
+      <h2>User Feedback</h2>
+      <p class="section-copy">A study with three researchers in scientific data analysis and visualization.</p>
       <div class="study-columns">
         <div class="panel bullet-card">
           <h3>Key Advantages</h3>
           <ul>
-            <li>Improved accessibility for novice users through natural language commands.</li>
-            <li>Reduced cognitive load by avoiding complex parameter memorization.</li>
-            <li>Faster and broader exploration enabled by multi-agent task decomposition.</li>
+            <li>This system is highly effective in reducing manual effort in volume rendering.</li>
+            <li>The automatic visualization parameter searching can save a lot of time, especially when the dataset is large.</li>
+            <li>Scientists rely less on technical knowledge to explore their data, which can help speed up analysis time.</li>
           </ul>
         </div>
         <div class="panel bullet-card">
-          <h3>Identified Shortcomings</h3>
+          <h3>Future Improvement</h3>
           <ul>
-            <li>Ambiguous natural language occasionally required extra iterations.</li>
-            <li>LLM latency could interrupt the interactive flow on harder tasks.</li>
-            <li>Specialized domain terminology remained limited by tool coverage.</li>
+            <li>SASAV has strong potential to evolve into a more closed-loop framework by incorporating additional agents for downstream tasks that evaluate and refine the visualization results.</li>
+            <li>Introducing more visualization techniques for more types of data, for example, point clouds and time-varying data.</li>
+            <li>Supporting collaboration by offering additional perspectives on the shared research problem.</li>
           </ul>
         </div>
       </div>
-      <div class="panel figure-wide" style="margin-top:18px;">
+      <!-- <div class="panel figure-wide" style="margin-top:18px;">
         <div class="placeholder-figure">Survey Responses Figure Placeholder</div>
-      </div>
+      </div> -->
     </section>
 
-    <section>
+    <!-- <section>
       <div class="panel abstract">
         <h2>System Demonstration</h2>
         <p>
           Embed a presentation video, conference demo clip, or interactive iframe here to mirror the live project page. Since this file is fully static and self-contained, the demo area can be connected later by replacing a placeholder with a local video file or an embedded player.
         </p>
       </div>
-    </section>
+    </section> -->
 
-    <section>
+    <!-- <section>
       <h2>BibTeX</h2>
       <pre class="bibtex">@article{ai2025nli4volvis,
   author  = {Ai, Kuangshi and Tang, Kaiyuan and Wang, Chaoli},
@@ -439,11 +447,11 @@
   archivePrefix = {arXiv},
   note    = {Preprint available at https://arxiv.org/abs/2507.12621}
 }</pre>
-    </section>
+    </section> -->
   </main>
 
   <footer class="container footer">
-    This single-file replica mirrors the layout and visual style of the original academic project page, while keeping all styling embedded directly inside <code>index.html</code>.
+   SASAV: Self-Directed Agent for Scientific Analysis and Visualization
   </footer>
 </body>
 </html>
